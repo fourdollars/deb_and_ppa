@@ -74,7 +74,7 @@
           <li>Debian packaging</li>
           <ul>
             <li>pbuilder/cowbuilder</li>
-            <li>ubuntu-dev-tools</li>
+            <li>pbuilder-dist</li>
           </ul>
           <li>Ubuntu PPA</li>
           <ul>
@@ -144,7 +144,7 @@
         <h3>
           Advanced Package Tool
         </h3>
-        <p>/etc/apt/sources.list<br>/etc/apt/sources.list.d/*.list</p>
+	<p>/etc/apt/sources.list<br>/etc/apt/sources.list.d/*.list<br>$ man sources.list</p>
         <pre>deb http://ftp.tw.debian.org/debian/ squeeze main contrib non-free
 deb-src http://ftp.tw.debian.org/debian/ squeeze main contrib non-free</pre>
         <dl>
@@ -154,7 +154,7 @@ deb-src http://ftp.tw.debian.org/debian/ squeeze main contrib non-free</pre>
           <dt>source URI</dt>
           <dd><code>http</code>, https, file, cdrom, ftp, ssh</dd>
           <dt>distribution</dt>
-          <dd>old-stable, <code>stable</code>, testing, unstable, experimental</dd>
+          <dd>oldstable, <code>stable</code>, testing, unstable, experimental</dd>
           <dd>lenny, <code>squeeze</code>, wheezy, sid</dd>
           <dt>components</dt>
           <dd>main, contrib, non-free</dd>
@@ -187,117 +187,111 @@ ibus-chewing:
         500 http://archive.ubuntu.com/ubuntu/ oneiric/main i386 Packages</pre>
       </article>
 
-      <article>
+      <article class='smaller'>
         <h3>
           練習製作 Debian packages (一)
         </h3>
         <dl>
           <dt>安裝製作 Debian packages 所需套件</dt>
-          <dd><code># apt-get install dpkg-dev build-essential</code></dd>
+          <dd># apt-get install <code>dpkg-dev build-essential devscripts quilt ubuntu-dev-tools</code></dd>
           <dt>下載 Source packages</dt>
-          <dd><code>$ apt-get source --download-only hello</code></dd>
+          <dd>$ <code>apt-get source</code> --download-only hello</dd>
+          <dd>$ <code>dget -u</code> http://ftp.tw.debian.org/debian/pool/main/h/hello/hello_2.7-2<code>.dsc</code></dd>
         </dl>
         <dl>
           <dt>dpkg-dev 是處理 Source packages 的基本工具</dt>
           <dt>build-essential 是編譯 Binary packages 的基本套件集</dt>
           <dt>/usr/share/build-essential/essential-packages-list</dt>
+          <dt>devscripts 提供的工具，如 dch, what-patch, debuild, ...</dt>
+          <dt>ubuntu-dev-tools 提供的工具，如 pbuilder-dist, ...</dt>
         </dl>
+      </article>
+
+      <article>
         <h3>
-          Source packages
+          練習製作 Debian packages (二)
         </h3>
         <dl>
-          <dt>hello_2.7-1.debian.tar.gz</dt>
-          <dt>hello_2.7-1.dsc</dt>
-          <dt>hello_2.7.orig.tar.gz</dt>
+          <dt>Source packages 的三個主要檔案</dt>
+          <dd>hello_2.7-1<code>.debian.tar.gz</code> -- debian/ 目錄</dd>
+          <dd>hello_2.7-1<code>.dsc</code> -- 描述檔</dd>
+          <dd>hello_2.7<code>.orig.tar.gz</code> -- 上游原始碼包</dd>
+          <dt>解開 Source packages 的指令</dt>
+          <dd>$ <code>dpkg-source -x</code> hello_2.7-1<code>.dsc</code></dd>
+          <dt>變更版號資訊</dt>
+          <dd>$ <code>dch -i</code> This is a test.
+          <dt>只編譯 Binary packages 的指令</dt>
+          <dd>$ <code>dpkg-buildpackage</code> -us -uc -tc <code>-b</code></dd>
+          <dt>只編譯 Source packages 的指令</dt>
+          <dd>$ <code>dpkg-buildpackage</code> -us -uc <code>-S</code></dd>
+          <dt>比較不同版本間的差異</dt>
+          <dd>$ <code>debdiff</code> hello_2.7-1.dsc hello_2.7-2.dsc</dd>
         </dl>
       </article>
 
-      <article class='smaller'>
-        <h3>
-          Slide with bullet points (small font)
-        </h3>
-        <ul>
-          <li>
-            Use this template to create your presentation
-          <li>
-            Use the provided color palette, box and arrow graphics, and
-            chart styles
-          <li>
-            Instructions are provided to assist you in using this
-            presentation template effectively
-          <li>
-            At all times strive to maintain Google's corporate look and feel
-        </ul>
-      </article>
-
       <article>
         <h3>
-          Slide with a table
+          dpkg 的操作
         </h3>
-        
-        <table>
-          <tr>
-            <th>
-              Name
-            <th>
-              Occupation
-          <tr>
-            <td>
-              Luke Mahé
-            <td>
-              V.P. of Keepin’ It Real
-          <tr>
-            <td>
-              Marcin Wichary
-            <td>
-              The Michael Bay of Doodles
-        </table>
-      </article>
-      
-      <article class='smaller'>
-        <h3>
-          Slide with a table (smaller text)
-        </h3>
-        
-        <table>
-          <tr>
-            <th>
-              Name
-            <th>
-              Occupation
-          <tr>
-            <td>
-              Luke Mahé
-            <td>
-              V.P. of Keepin’ It Real
-          <tr>
-            <td>
-              Marcin Wichary
-            <td>
-              The Michael Bay of Doodles
-        </table>
+        <dl>
+          <dt>查詢 Debian packages 的資訊</dt>
+          <dd>$ <code>dpkg -I</code> hello_2.7-3_i386.deb</dd>
+          <dt>查詢 Debian packages 的內容</dt>
+          <dd>$ <code>dpkg -c</code> hello_2.7-3_i386.deb</dd>
+          <dt>安裝 Debian packages</dt>
+          <dd># <code>dpkg -i</code> hello_2.7-3_i386.deb</dd>
+          <dt>查詢系統中的 Debian packages 資訊</dt>
+          <dd>$ <code>dpkg -s</code> hello</dd>
+          <dt>查詢系統中的 Debian packages 內容</dt>
+          <dd>$ <code>dpkg -L</code> hello</dd>
+          <dt>移除系統中的 Debian packages</dt>
+          <dd># <code>dpkg -r</code> hello</dd>
+          <dt>移除系統中的 Debian packages (連同 /etc 底下的設定檔)</dt>
+          <dd># <code>dpkg -P</code> hello</dd>
       </article>
       
       <article>
         <h3>
-          Styles
+          Native v.s. Non-Native
         </h3>
+        <dl>
+          <dt>Native</dt>
+          <dd>只提供給 Debian 系統使用的套件，如 debian-policy, debian-reference, debhelper, ...</dd>
+          <dt>Non-Native</dt>
+          <dd>除了 Native 以外的所有套件</dd>
+        </dl>
+        <h3>
+          Debian version 版本號碼
+        </h3>
+        <pre>[epoch:]upstream_version[-debian_revision]</pre>
+        <p>版號沒有 [-debian_revision] 的套件都是 native 的套件</p>
         <ul>
-          <li>
-            <span class='red'>class="red"</span>
-          <li>
-            <span class='blue'>class="blue"</span>
-          <li>
-            <span class='green'>class="green"</span>
-          <li>
-            <span class='yellow'>class="yellow"</span>
-          <li>
-            <span class='black'>class="black"</span>
-          <li>
-            <span class='white'>class="white"</span>
-          <li>
-            <b>bold</b> and <i>italic</i>
+          <li><a href="http://fourdollars.blogspot.com/2010/06/debian-package-5.html" target="_blank">Debian Package (5) - 版本號碼</a></li>
+          <li><a href="http://www.slideshare.net/FourDollars/debian-policy-5612-version" target="_blank">Debian Policy - 5.6.12 Version</a></li>
         </ul>
+      </article>
+      
+      <article>
+        <h3>
+          使用 quilt 修補 Debian packages
+        </h3>
+        <dl>
+          <dt>設定 ~/.quiltrc</dt>
+          <dd>QUILT_PATCHES=debian/patches</dd>
+	  <dd>QUILT_DIFF_ARGS="--color=auto"</dt>
+          <dt>查詢目前套件的所有 patch 資訊</dt>
+          <dd>$ quilt <code>series</code></dd>
+          <dt>查詢目前在哪個 patch</dt>
+          <dd>$ quilt <code>top</code></dd>
+          <dt>增加新的 patch</dt>
+          <dd>$ quilt <code>new</code> 02-fix-some-typo.patch</dd>
+          <dt>加入要 patch 的檔案</dt>
+          <dd>$ quilt <code>add</code> src/hello.c</dd>
+          <dt>更新 patch</dt>
+          <dd>$ quilt <code>refresh</code></dd>
+          <dt>變更版號資訊</dt>
+          <dd>$ <code>dch -l</code> kitty This is Hello Kitty.</dd>
+        </dl>
       </article>
       
       <article>
