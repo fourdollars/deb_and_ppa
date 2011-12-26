@@ -57,7 +57,7 @@
           Dec. 27, 2011
         </p>
         <p>
-          <a href="http://creativecommons.org/licenses/by-sa/3.0/tw/">CC BY-SA 3.0</a>
+          <a href="http://creativecommons.org/licenses/by-sa/3.0/tw/" target="_blank">CC BY-SA 3.0</a>
         </p>
 
       </article>
@@ -66,17 +66,11 @@
         <h3>
           Agenda
         </h3>
-        <ul class="build">
+        <ul>
           <li>Debian &amp; Ubuntu</li>
           <li>Canonical &amp; Launchpad</li>
-          <li>Debian package</li>
-          <ul>
-            <li>deb &amp; udeb</li>
-          </ul>
-          <li>Debian archives</li>
-          <ul>
-            <li>APT</li>
-          </ul>
+          <li>Debian packages</li>
+          <li>Advanced Package Tool</li>
           <li>Debian packaging</li>
           <ul>
             <li>pbuilder/cowbuilder</li>
@@ -88,89 +82,134 @@
           </ul>
         </ul>
       </article>
-      
+
       <article>
-        <p>
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-        </p>
-        <p>
-          There is more text just underneath.
-        </p>
+        <dl>
+          <dt><a href="http://zh.wikipedia.org/wiki/Debian" target="_blank">Debian</a></dt>
+          <dd>Debian是由GPL和其他自由軟體許可協議授權的自由軟體組成的作業系統，由Debian計畫（Debian Project）組織維護。Debian計畫是一個獨立的、分散的組織，由3000人志願者組成，接受世界多個非盈利組織的資金支援，Software in the Public Interest提供支援並持有商標作為保護機構。</dd>
+          <dt><a href="http://zh.wikipedia.org/wiki/Ubuntu" target="_blank">Ubuntu</a></dt>
+          <dd>Ubuntu基於Debian發行版和GNOME桌面環境，與Debian的不同在於它每6個月會發佈一個新版本。</dd>
+          <dd>Ubuntu的運作主要依賴Canonical有限公司的支援，同時亦有來自Linux社區的熱心人士提供協助。</dd>
+        </dl>
+      </article>
+
+      <article>
+        <dl>
+          <dt><a href="http://zh.wikipedia.org/wiki/Canonical" target="_blank">Canonical</a></dt>
+          <dd>英屬曼島商肯諾有限公司 (Canonical Ltd) 是一家私人公司，由南非的企業家馬克·沙特爾沃思建立，主要為了促進開源軟體項目。Canonical在曼島登記註冊，其僱員分布在世界各地，其主要辦事處在倫敦，在波士頓、聖保羅、蒙特婁、上海、台北和曼島也有分公司。</dd>
+          <dt><a href="http://zh.wikipedia.org/wiki/Launchpad" target="_blank">Launchpad</a></dt>
+          <dd>Launchpad是Canonical有限公司所架設的網站，是一個提供維護、支援或連絡Ubuntu開發者的平台。其中提供了線上翻譯軟體的功能，你可以自由的參與Ubuntu或相關自由軟體的開發或翻譯工作。而你也可以利用該網站的回報機制來回報相關軟體的Bug，或者進一步提供建議。</dd>
+        </dl>
       </article>
 
       <article>
         <h3>
-          Simple slide with header and text
+          Debian packages
         </h3>
-        <p>
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-        </p>
-        <p>
-          There is more text just underneath with a <code>code sample: 5px</code>.
-        </p>
-      </article>
-
-      <article class='smaller'>
+        <dl>
+          <dt>Binary packages</dt>
+          <dd>用來安裝在 Debian 系統上的套件</dd>
+          <dt>Source packages</dt>
+          <dd>用來製作 Binary packages 的原始碼套件</dd>
+        </dl>
         <h3>
-          Simple slide with header and text (small font)
+          Binary packages 使用在不同的地方
         </h3>
-        <p>
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-          This is a slide with just text. This is a slide with just text.
-        </p>
-        <p>
-          There is more text just underneath with a <code>code sample: 5px</code>.
-        </p>
+        <dl>
+          <dt>deb</dt>
+          <dd>用來安裝在一般的 Debian 系統上的套件</dd>
+          <dt>udeb</dt>
+          <dd>用來安裝在 Debian Installer 系統上面的套件</dd>
+        </dl>
       </article>
 
       <article>
         <h3>
-          Slide with bullet points and a longer title, just because we
-          can make it longer
+          Debian packages 在 CPU 架構上的差異
         </h3>
-        <ul>
-          <li>
-            Use this template to create your presentation
-          </li>
-          <li>
-            Use the provided color palette, box and arrow graphics, and
-            chart styles
-          </li>
-          <li>
-            Instructions are provided to assist you in using this
-            presentation template effectively
-          </li>
-          <li>
-            At all times strive to maintain Google's corporate look and feel
-          </li>
-        </ul>
+        <dl>
+          <dt>any</dt>
+          <dd>在任何不同的 CPU 架構上面都可以運行</dd>
+          <dd>對針對不同的 CPU 架構各編譯一個專屬的套件</dd>
+          <dt>all</dt>
+          <dd>在所有的 CPU 架構上面都可以運行</dd>
+          <dd>只需要在某個 CPU 架構上面編譯出一個套件即可</dd>
+          <dt>i386, amd64, ...</dt>
+          <dd>只針對某些 CPU 架構提供支援</dd>
+          <dd>在這些 CPU 架構上面各編譯出相對的套件</dd>
+        </dl>
+      </article>
+
+      <article class="smaller">
+        <h3>
+          Advanced Package Tool
+        </h3>
+        <p>/etc/apt/sources.list<br>/etc/apt/sources.list.d/*.list</p>
+        <pre>deb http://ftp.tw.debian.org/debian/ squeeze main contrib non-free
+deb-src http://ftp.tw.debian.org/debian/ squeeze main contrib non-free</pre>
+        <dl>
+          <dt>package type</dt>
+          <dd><code>deb</code> 使用在 Binary packages</dd>
+          <dd><code>deb-src</code> 使用在 Source packages</dd>
+          <dt>source URI</dt>
+          <dd><code>http</code>, https, file, cdrom, ftp, ssh</dd>
+          <dt>distribution</dt>
+          <dd>old-stable, <code>stable</code>, testing, unstable, experimental</dd>
+          <dd>lenny, <code>squeeze</code>, wheezy, sid</dd>
+          <dt>components</dt>
+          <dd>main, contrib, non-free</dd>
+        </dl>
+      </article>
+
+      <article class="smaller">
+        <h3>
+          Advanced Package Tool
+        </h3>
+        <p>/etc/apt/preferences<br>/etc/apt/preferences.d/*<br>$ man apt_preferences</p>
+        <pre>Package: *
+Pin: release a=*-proposed
+Pin-Priority: 400
+
+Package: *
+Pin: origin "ppa.launchpad.net"
+Pin-Priority: 450</pre>
+        <pre>$ apt-cache policy ibus-chewing
+ibus-chewing:
+  已安裝：1.3.9.2-3ubuntu2sylee1
+  候選： 1.3.9.2-3ubuntu2sylee1
+  版本列表：
+ *** 1.3.9.2-3ubuntu2sylee1 0
+        450 http://ppa.launchpad.net/fourdollars/ibus/ubuntu/ oneiric/main i386 Packages
+        100 /var/lib/dpkg/status
+     1.3.9.2-3ubuntu1.1 0
+        500 http://archive.ubuntu.com/ubuntu/ oneiric-updates/main i386 Packages
+     1.3.9.2-3ubuntu1 0
+        500 http://archive.ubuntu.com/ubuntu/ oneiric/main i386 Packages</pre>
       </article>
 
       <article>
         <h3>
-          Slide with bullet points that builds
+          練習製作 Debian packages (一)
         </h3>
-        <ul class="build">
-          <li>
-            This is an example of a list
-          </li>
-          <li>
-            The list items fade in
-          </li>
-          <li>
-            Last one!
-          </li>
-        </ul>
-
-        <div class="build">
-          <p>Any element with child nodes can build.</p>
-          <p>It doesn't have to be a list.</p>
-        </div>
+        <dl>
+          <dt>安裝製作 Debian packages 所需套件</dt>
+          <dd><code># apt-get install dpkg-dev build-essential</code></dd>
+          <dt>下載 Source packages</dt>
+          <dd><code>$ apt-get source --download-only hello</code></dd>
+        </dl>
+        <dl>
+          <dt>dpkg-dev 是處理 Source packages 的基本工具</dt>
+          <dt>build-essential 是編譯 Binary packages 的基本套件集</dt>
+          <dt>/usr/share/build-essential/essential-packages-list</dt>
+        </dl>
+        <h3>
+          Source packages
+        </h3>
+        <dl>
+          <dt>hello_2.7-1.debian.tar.gz</dt>
+          <dt>hello_2.7-1.dsc</dt>
+          <dt>hello_2.7.orig.tar.gz</dt>
+        </dl>
       </article>
 
       <article class='smaller'>
@@ -396,7 +435,7 @@
         
         <ul>
           <li>
-            <a href='http://about.me/fourdollars'>http://about.me/fourdollars</a>
+            <a href='http://about.me/fourdollars' target='_blank'>http://about.me/fourdollars</a>
         </ul>
       </article>
 
