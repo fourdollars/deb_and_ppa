@@ -74,7 +74,7 @@
           <li>Debian packaging</li>
           <ul>
             <li>pbuilder/cowbuilder</li>
-            <li>pbuilder-dist</li>
+            <li>pbuilder-dist/cowbuilder-dist</li>
           </ul>
           <li>Ubuntu PPA</li>
           <ul>
@@ -426,99 +426,45 @@ DEBOOTSTRAPOPTS=('--keyring=/usr/share/keyrings/debian-archive-keyring.gpg')</pr
 
       <article>
         <h3>
-          This slide has some code
+          Ubuntu PPA
         </h3>
-        <section>
-        <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
-</pre>
-        </section>
-      </article>
-      
-      <article class='smaller'>
-        <h3>
-          This slide has some code (small font)
-        </h3>
-        <section>
-        <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
-</pre>
-        </section>
-      </article>
-      
-      <article>
-        <q>
-          The best way to predict the future is to invent it.
-        </q>
-        <div class='author'>
-          Alan Kay
+        <dl>
+          <dt>要準備的東西</dt>
+          <dd><code>OpenPGP</code> public key</dd>
+          <dd><code>SSH</code> public key</dd>
+          <dt>登入 Launchpad 個人頁面</dt>
+          <dd>https://launchpad.net/~fourdollars</dd>
+          <dt>新增 PPA</dt>
+          <dd>https://launchpad.net/~fourdollars/<code>+activate-ppa</code></dd>
+          <dt>簽署 Source packages 並上傳</dt>
+          <dd>$ <code>DEBFULLNAME</code>='Shih-Yuan Lee (FourDollars)'</dd>
+          <dd>$ <code>DEBEMAIL</code>='fourdollars@gmail.com'</dd>
+          <dd>$ <code>dpkg-buildpackage</code> <code>-S</code></dd>
+          <dd>$ <code>debuild</code> <code>-S</code></dd>
+          <dd>$ <code>dput ppa:</code>fourdollars/ppa hello_2.7-2kitty1_<code>source.changes</code></dd>
+        </dl>
+        <div class="source">
+          <a href="http://wiki.debian.org.tw/GnuPG" target="_blank">GnuPG - DebianWiki</a>
+          <a href="http://fourdollars.blogspot.com/search/label/GnuPG" target="_blank">FourDollars Blog: GnuPG</a>
         </div>
       </article>
-      
-      <article class='smaller'>
-        <q>
-          A distributed system is one in which the failure of a computer 
-          you didn’t even know existed can render your own computer unusable.
-        </q>
-        <div class='author'>
-          Leslie Lamport
-        </div>
-      </article>
-      
-      <article class='nobackground'>
-        <h3>
-          A slide with an embed + title
-        </h3>
-        
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
 
-      <article class='nobackground'>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
-
-      <article class='fill'>
-        <h3>
-          Full-slide embed with (optional) slide title on top
-        </h3>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
-      
       <article>
         <h3>
+          PPA Daily Build
+        </h3>
+        <div class="source">
+          <a href="https://help.launchpad.net/Packaging/SourceBuilds/GettingStarted" target="_blank">Packaging/SourceBuilds/GettingStarted - Launchpad Help</a>
+        </div>
+      </article>
+
+      <article>
+        <q>
           Thank you!
-        </h3>
-        
-        <ul>
-          <li>
-            <a href='http://about.me/fourdollars' target='_blank'>http://about.me/fourdollars</a>
-        </ul>
+        </q>
+        <p>
+          <a href='http://about.me/fourdollars' target='_blank'>http://about.me/fourdollars</a>
+        </p>
       </article>
 
     </section>
