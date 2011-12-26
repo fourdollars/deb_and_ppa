@@ -87,6 +87,7 @@
         <dl>
           <dt><a href="http://zh.wikipedia.org/wiki/Debian" target="_blank">Debian</a></dt>
           <dd>Debian是由GPL和其他自由軟體許可協議授權的自由軟體組成的作業系統，由Debian計畫（Debian Project）組織維護。Debian計畫是一個獨立的、分散的組織，由3000人志願者組成，接受世界多個非盈利組織的資金支援，Software in the Public Interest提供支援並持有商標作為保護機構。</dd>
+          <br>
           <dt><a href="http://zh.wikipedia.org/wiki/Ubuntu" target="_blank">Ubuntu</a></dt>
           <dd>Ubuntu基於Debian發行版和GNOME桌面環境，與Debian的不同在於它每6個月會發佈一個新版本。</dd>
           <dd>Ubuntu的運作主要依賴Canonical有限公司的支援，同時亦有來自Linux社區的熱心人士提供協助。</dd>
@@ -97,6 +98,7 @@
         <dl>
           <dt><a href="http://zh.wikipedia.org/wiki/Canonical" target="_blank">Canonical</a></dt>
           <dd>英屬曼島商肯諾有限公司 (Canonical Ltd) 是一家私人公司，由南非的企業家馬克·沙特爾沃思建立，主要為了促進開源軟體項目。Canonical在曼島登記註冊，其僱員分布在世界各地，其主要辦事處在倫敦，在波士頓、聖保羅、蒙特婁、上海、台北和曼島也有分公司。</dd>
+          <br>
           <dt><a href="http://zh.wikipedia.org/wiki/Launchpad" target="_blank">Launchpad</a></dt>
           <dd>Launchpad是Canonical有限公司所架設的網站，是一個提供維護、支援或連絡Ubuntu開發者的平台。其中提供了線上翻譯軟體的功能，你可以自由的參與Ubuntu或相關自由軟體的開發或翻譯工作。而你也可以利用該網站的回報機制來回報相關軟體的Bug，或者進一步提供建議。</dd>
         </dl>
@@ -193,7 +195,7 @@ ibus-chewing:
         </h3>
         <dl>
           <dt>安裝製作 Debian packages 所需套件</dt>
-          <dd># apt-get install <code>dpkg-dev build-essential devscripts quilt ubuntu-dev-tools</code></dd>
+          <dd># apt-get install <code>dpkg-dev build-essential devscripts quilt</code></dd>
           <dt>下載 Source packages</dt>
           <dd>$ <code>apt-get source</code> --download-only hello</dd>
           <dd>$ <code>dget -u</code> http://ftp.tw.debian.org/debian/pool/main/h/hello/hello_2.7-2<code>.dsc</code></dd>
@@ -203,7 +205,6 @@ ibus-chewing:
           <dt>build-essential 是編譯 Binary packages 的基本套件集</dt>
           <dt>/usr/share/build-essential/essential-packages-list</dt>
           <dt>devscripts 提供的工具，如 dch, what-patch, debuild, ...</dt>
-          <dt>ubuntu-dev-tools 提供的工具，如 pbuilder-dist, ...</dt>
         </dl>
       </article>
 
@@ -265,20 +266,22 @@ ibus-chewing:
         </h3>
         <pre>[epoch:]upstream_version[-debian_revision]</pre>
         <p>版號沒有 [-debian_revision] 的套件都是 native 的套件</p>
-        <ul>
-          <li><a href="http://fourdollars.blogspot.com/2010/06/debian-package-5.html" target="_blank">Debian Package (5) - 版本號碼</a></li>
-          <li><a href="http://www.slideshare.net/FourDollars/debian-policy-5612-version" target="_blank">Debian Policy - 5.6.12 Version</a></li>
-        </ul>
+        <div class='source'>
+          <ul>
+            <li><a href="http://fourdollars.blogspot.com/2010/06/debian-package-5.html" target="_blank">Debian Package (5) - 版本號碼</a></li>
+            <li><a href="http://www.slideshare.net/FourDollars/debian-policy-5612-version" target="_blank">Debian Policy - 5.6.12 Version</a></li>
+          </ul>
+        </div>
       </article>
       
       <article>
         <h3>
-          使用 quilt 修補 Debian packages
+          使用 quilt 修補 Non-Native Debian packages
         </h3>
         <dl>
           <dt>設定 ~/.quiltrc</dt>
-          <dd>QUILT_PATCHES=debian/patches</dd>
-	  <dd>QUILT_DIFF_ARGS="--color=auto"</dt>
+          <dd><code>QUILT_PATCHES</code>=debian/patches</dd>
+          <dd><code>QUILT_DIFF_ARGS</code>="--color=auto"</dt>
           <dt>查詢目前套件的所有 patch 資訊</dt>
           <dd>$ quilt <code>series</code></dd>
           <dt>查詢目前在哪個 patch</dt>
@@ -295,45 +298,130 @@ ibus-chewing:
       </article>
       
       <article>
-        <h2>
-          Segue slide
-        </h2>
-      </article>
-
-      <article>
         <h3>
-          Slide with an image
+          pbuilder
         </h3>
         <p>
-          <img style='height: 500px' src='images/tossug.png'>
+          建立一個 chroot 的環境 (cleanroom) 來編譯 Debian packages
         </p>
-        <div class='source'>
-          Source: TOSSUG
+        <br>
+        <h3>
+          cowbuilder
+        </h3>
+        <p>
+          加速 pbuilder 執行速度的外掛，在某些套件編譯會發生問題。
+        </p>
+        <br>
+        <h3>
+          pbuilder-dist/cowbuilder-dist
+        </h3>
+        <p>
+          簡化使用 pbuilder 時的複雜度
+        </p>
+      </article>
+
+      <article class="smaller">
+        <h3>
+          使用 pbuilder/cowbuilder 前的準備 
+        </h3>
+        <dl>
+          <dt>安裝所需套件</dt>
+          <dd># apt-get install <code>pbuilder ccache cowbuilder</code></dd>
+          <dt>手動建立 ccache 需要的目錄</dt>
+          <dd># mkdir -p /var/cache/ccache</dd>
+          <dt>編輯設定檔 ~/.pbuilderrc</dt>
+          <pre>MIRRORSITE=http://cdn.debian.net/debian/
+COMPONENTS="main contrib non-free"
+DISTRIBUTION=testing
+BUILDRESULT=~/deb/
+DEBOOTSTRAPOPTS=('--keyring=/usr/share/keyrings/debian-archive-keyring.gpg')</pre>
+          <dt>
+        </dl>
+        <div class="source">
+          <a href="http://fourdollars.blogspot.com/2010/09/debian-package-6-pbuilder-personal.html" target="_blank">Debian Package (6) - 使用 pbuilder - personal package builder 個人 Debian Package 製作工具</a>
         </div>
       </article>
 
       <article>
         <h3>
-          Slide with an image (centered)
+          pbuilder
         </h3>
-        <p>
-          <img class='centered' style='height: 500px' src='images/tossug.png'>
-        </p>
-        <div class='source'>
-          Source: TOSSUG
+        <dl>
+          <dt>產生基本的 chroot 環境</dt>
+          <dd># pbuilder <code>--create</code></dd>
+          <dt>更新 chroot 環境</dt>
+          <dd># pbuilder <code>--update</code></dd>
+          <dt>編譯套件</dt>
+          <dd># pbuilder <code>--build</code> hello_2.7-2kitty1.dsc</dd>
+          <dt>進入 chroot 環境中操作</dt>
+          <dd># pbuilder <code>--login</code></dd>
+        </dl>
+      </article>
+
+      <article>
+        <h3>
+          cowbuilder
+        </h3>
+        <dl>
+          <dt>產生基本的 chroot 環境</dt>
+          <dd># cowbuilder <code>--create</code></dd>
+          <dt>更新 chroot 環境</dt>
+          <dd># cowbuilder <code>--update</code></dd>
+          <dt>編譯套件</dt>
+          <dd># cowbuilder <code>--build</code> hello_2.7-2kitty1.dsc</dd>
+          <dt>進入 chroot 環境中操作</dt>
+          <dd># cowbuilder <code>--login</code></dd>
+        </dl>
+        <div class="source">
+          <a href="http://hychen.wuweig.org/blog/2011/02/13/li-yong-cowbuilder-jian-li-bu-tong-de-debian-package-bian-yi-huan-jing/" target="_blank">利用 Cowbuilder 建立不同的debian Package 編譯環境</a>
         </div>
       </article>
 
-      <article class='fill'>
+      <article class="smaller">
         <h3>
-          Image filling the slide (with optional header)
+          使用 pbuilder-dist/cowbuilder-dist 前的準備 
         </h3>
-        <p>
-          <img src='images/Dybbølsbro_Station_by_SirPecanGum.jpg'>
-        </p>
-        <div class='source white'>
-          Source: Ubuntu
+        <dl>
+          <dt>安裝所需套件</dt>
+          <dd># apt-get install pbuilder ccache cowbuilder <code>ubuntu-dev-tools</code></dd>
+          <dt>手動建立 ccache 需要的目錄</dt>
+          <dd># mkdir -p /var/cache/ccache</dd>
+        </dl>
+      </article>
+
+      <article>
+        <h3>
+          pbuilder-dist
+        </h3>
+        <dl>
+          <dt>產生基本的 chroot 環境</dt>
+          <dd>$ pbuilder-dist testing i386 <code>create</code></dd>
+          <dt>更新 chroot 環境</dt>
+          <dd>$ pbuilder-dist testing i386 <code>update</code></dd>
+          <dt>編譯套件</dt>
+          <dd>$ pbuilder-dist testing i386 <code>build</code> hello_2.7-2kitty1.dsc</dd>
+          <dt>進入 chroot 環境中操作</dt>
+          <dd>$ pbuilder-dist testing i386 <code>login</code></dd>
+        </dl>
+        <div class='source'>
+          <a href="http://fourdollars.blogspot.com/2011/07/pbuilder-distcowbuilder-dist-debian.html" target="_blank">使用 pbuilder-dist/cowbuilder-dist 協助編譯及打包 Debian package</a>
         </div>
+      </article>
+
+      <article>
+        <h3>
+          cowbuilder-dist
+        </h3>
+        <dl>
+          <dt>產生基本的 chroot 環境</dt>
+          <dd>$ cowbuilder-dist testing i386 <code>create</code></dd>
+          <dt>更新 chroot 環境</dt>
+          <dd>$ cowbuilder-dist testing i386 <code>update</code></dd>
+          <dt>編譯套件</dt>
+          <dd>$ cowbuilder-dist testing i386 <code>build</code> hello_2.7-2kitty1.dsc</dd>
+          <dt>進入 chroot 環境中操作</dt>
+          <dd>$ cowbuilder-dist testing i386 <code>login</code></dd>
+        </dl>
       </article>
 
       <article>
