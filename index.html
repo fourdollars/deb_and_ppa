@@ -318,6 +318,9 @@ ibus-chewing:
         <p>
           簡化使用 pbuilder 時的複雜度
         </p>
+        <div class="source">
+          <a href="https://wiki.ubuntu.com/PbuilderHowto" target="_blank">PbuilderHowto - Ubuntu Wiki</a>
+        </div>
       </article>
 
       <article class="smaller">
@@ -330,7 +333,7 @@ ibus-chewing:
           <dt>手動建立 ccache 需要的目錄</dt>
           <dd># mkdir -p /var/cache/ccache</dd>
           <dt>編輯設定檔 ~/.pbuilderrc</dt>
-          <pre>MIRRORSITE=http://cdn.debian.net/debian/
+          <pre>MIRRORSITE=http://ftp.debian.org/debian/
 COMPONENTS="main contrib non-free"
 DISTRIBUTION=testing
 BUILDRESULT=~/deb/
@@ -348,13 +351,13 @@ DEBOOTSTRAPOPTS=('--keyring=/usr/share/keyrings/debian-archive-keyring.gpg')</pr
         </h3>
         <dl>
           <dt>產生基本的 chroot 環境</dt>
-          <dd># pbuilder <code>--create</code></dd>
+          <dd># pbuilder <code>create</code></dd>
           <dt>更新 chroot 環境</dt>
-          <dd># pbuilder <code>--update</code></dd>
+          <dd># pbuilder <code>update</code></dd>
           <dt>編譯套件</dt>
-          <dd># pbuilder <code>--build</code> hello_2.7-2kitty1.dsc</dd>
+          <dd># pbuilder <code>build</code> hello_2.7-2kitty1.dsc</dd>
           <dt>進入 chroot 環境中操作</dt>
-          <dd># pbuilder <code>--login</code></dd>
+          <dd># pbuilder <code>login</code></dd>
         </dl>
       </article>
 
@@ -364,13 +367,13 @@ DEBOOTSTRAPOPTS=('--keyring=/usr/share/keyrings/debian-archive-keyring.gpg')</pr
         </h3>
         <dl>
           <dt>產生基本的 chroot 環境</dt>
-          <dd># cowbuilder <code>--create</code></dd>
+          <dd># cowbuilder <code>create</code></dd>
           <dt>更新 chroot 環境</dt>
-          <dd># cowbuilder <code>--update</code></dd>
+          <dd># cowbuilder <code>update</code></dd>
           <dt>編譯套件</dt>
-          <dd># cowbuilder <code>--build</code> hello_2.7-2kitty1.dsc</dd>
+          <dd># cowbuilder <code>build</code> hello_2.7-2kitty1.dsc</dd>
           <dt>進入 chroot 環境中操作</dt>
-          <dd># cowbuilder <code>--login</code></dd>
+          <dd># cowbuilder <code>login</code></dd>
         </dl>
         <div class="source">
           <a href="http://hychen.wuweig.org/blog/2011/02/13/li-yong-cowbuilder-jian-li-bu-tong-de-debian-package-bian-yi-huan-jing/" target="_blank">利用 Cowbuilder 建立不同的debian Package 編譯環境</a>
