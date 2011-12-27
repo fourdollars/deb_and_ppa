@@ -464,10 +464,12 @@ DEBOOTSTRAPOPTS=('--keyring=/usr/share/keyrings/debian-archive-keyring.gpg')</pr
           <dd><a href="https://launchpad.net/~vcs-imports" target="_blank">VCS imports</a></dd>
           <dd><a href="https://code.launchpad.net/+code-imports/+new" target="_blank">Request a code import</a></dd>
           <dt>測試食譜</dt>
-	  <dd>$ editor betaradio.recipe</dd>
-	  <pre># bzr-builder format 0.3 deb-version {debupstream}+svn{revno}-0ubuntu0~{time}
-lp:betaradio</pre>
-	  <dd>$ <code>bzr dailydeb</code> --allow-fallback-to-native betaradio.recipe working-dir</dd>
+          <dd>$ editor betaradio.recipe</dd>
+          <pre># bzr-builder format 0.3 deb-version {debupstream}+svn{revno}-0ubuntu0~{time}
+lp:betaradio
+merge packaging lp:~fourdollars/betaradio/daily-packaging</pre>
+          <dd>$ <code>bzr dailydeb</code> --allow-fallback-to-native betaradio.recipe working-dir</dd>
+          <dt>在匯入的程式碼上使用食譜 Ex. <a href="https://code.launchpad.net/~fourdollars/betaradio/trunk" target="_blank">lp:betaradio</a></dt>
         </dl>
         <div class="source">
 	  <a href="https://help.launchpad.net/Packaging/SourceBuilds/GettingStarted" target="_blank">Packaging/SourceBuilds/GettingStarted - Launchpad Help</a><br>
