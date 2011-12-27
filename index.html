@@ -387,8 +387,6 @@ DEBOOTSTRAPOPTS=('--keyring=/usr/share/keyrings/debian-archive-keyring.gpg')</pr
         <dl>
           <dt>安裝所需套件</dt>
           <dd># apt-get install pbuilder ccache cowbuilder <code>ubuntu-dev-tools</code></dd>
-          <dt>手動建立 ccache 需要的目錄</dt>
-          <dd># mkdir -p /var/cache/ccache</dd>
         </dl>
       </article>
 
@@ -405,6 +403,8 @@ DEBOOTSTRAPOPTS=('--keyring=/usr/share/keyrings/debian-archive-keyring.gpg')</pr
           <dd>$ pbuilder-dist testing i386 <code>build</code> hello_2.7-2kitty1.dsc</dd>
           <dt>進入 chroot 環境中操作</dt>
           <dd>$ pbuilder-dist testing i386 <code>login</code></dd>
+	  <dt>建立符號連結</dt>
+	  <dd>$ ln -s /usr/bin/pbuilder-dist ~/bin/pbuilder-testing-i386</dd>
         </dl>
         <div class='source'>
           <a href="http://fourdollars.blogspot.com/2011/07/pbuilder-distcowbuilder-dist-debian.html" target="_blank">使用 pbuilder-dist/cowbuilder-dist 協助編譯及打包 Debian package</a>
@@ -424,6 +424,8 @@ DEBOOTSTRAPOPTS=('--keyring=/usr/share/keyrings/debian-archive-keyring.gpg')</pr
           <dd>$ cowbuilder-dist testing i386 <code>build</code> hello_2.7-2kitty1.dsc</dd>
           <dt>進入 chroot 環境中操作</dt>
           <dd>$ cowbuilder-dist testing i386 <code>login</code></dd>
+	  <dt>建立符號連結</dt>
+	  <dd>$ ln -s /usr/bin/pbuilder-dist ~/bin/cowbuilder-testing-i386</dd>
         </dl>
       </article>
 
@@ -442,17 +444,16 @@ DEBOOTSTRAPOPTS=('--keyring=/usr/share/keyrings/debian-archive-keyring.gpg')</pr
           <dt>簽署 Source packages 並上傳</dt>
           <dd>$ <code>DEBFULLNAME</code>='Shih-Yuan Lee (FourDollars)'</dd>
           <dd>$ <code>DEBEMAIL</code>='fourdollars@gmail.com'</dd>
-          <dd>$ <code>dpkg-buildpackage</code> <code>-S</code></dd>
-          <dd>$ <code>debuild</code> <code>-S</code></dd>
+          <dd>$ <code>debsign</code> hello_2.7-2kitty1_source.changes</dd>
           <dd>$ <code>dput ppa:</code>fourdollars/ppa hello_2.7-2kitty1_<code>source.changes</code></dd>
         </dl>
         <div class="source">
-          <a href="http://wiki.debian.org.tw/GnuPG" target="_blank">GnuPG - DebianWiki</a>
+	    <a href="http://wiki.debian.org.tw/GnuPG" target="_blank">GnuPG - DebianWiki</a><br>
           <a href="http://fourdollars.blogspot.com/search/label/GnuPG" target="_blank">FourDollars Blog: GnuPG</a>
         </div>
       </article>
 
-      <article>
+      <article class="smaller">
         <h3>
           PPA Daily Build
         </h3>
@@ -462,11 +463,15 @@ DEBOOTSTRAPOPTS=('--keyring=/usr/share/keyrings/debian-archive-keyring.gpg')</pr
           <dt>設定自動匯入上游程式碼</dt>
           <dd><a href="https://launchpad.net/~vcs-imports" target="_blank">VCS imports</a></dd>
           <dd><a href="https://code.launchpad.net/+code-imports/+new" target="_blank">Request a code import</a></dd>
-          <dd><a href="https://code.launchpad.net/pcmanx/trunk/+setbranch" target="_blank">PCManX trunk series : Series trunk : Code : PCManX</a></dd>
-          <dt>填寫菜單</dt>
+          <dt>測試食譜</dt>
+	  <dd>$ editor betaradio.recipe</dd>
+	  <pre># bzr-builder format 0.3 deb-version {debupstream}+svn{revno}-0ubuntu0~{time}
+lp:betaradio</pre>
+	  <dd>$ <code>bzr dailydeb</code> --allow-fallback-to-native betaradio.recipe working-dir</dd>
         </dl>
         <div class="source">
-          <a href="https://help.launchpad.net/Packaging/SourceBuilds/GettingStarted" target="_blank">Packaging/SourceBuilds/GettingStarted - Launchpad Help</a>
+	  <a href="https://help.launchpad.net/Packaging/SourceBuilds/GettingStarted" target="_blank">Packaging/SourceBuilds/GettingStarted - Launchpad Help</a><br>
+	  <a href="https://help.launchpad.net/Packaging/SourceBuilds/Recipes" target="_blank">Packaging/SourceBuilds/Recipes - Launchpad Help</a><br>
         </div>
       </article>
 
